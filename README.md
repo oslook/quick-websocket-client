@@ -1,4 +1,4 @@
-# WebSocket Client
+# Quick WebSocket Client
 
 A powerful and user-friendly WebSocket testing client for developers.
 

@@ -56,7 +56,7 @@ const App = () => {
       <div className="flex-1 flex flex-col h-full">
         <div className="p-6 pb-0">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-1">WebSocket Client</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-1">Quick WebSocket Client</h1>
             <p className="text-gray-500">Connect and test your WebSocket endpoints</p>
           </div>
           <ConnectionPanel

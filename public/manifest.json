@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "WebSocket Client",
-  "version": "1.0",
-  "description": "A WebSocket client for testing WebSocket connections",
+  "name": "Quick WebSocket Client",
+  "version": "0.0.1",
+  "description": "A Quick WebSocket Client for testing WebSocket connections",
   "action": {
     "default_icon": "icon.png"
   },
