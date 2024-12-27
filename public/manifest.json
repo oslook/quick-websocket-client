@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Quick WebSocket Client",
   "version": "0.0.1",
-  "description": "A Quick WebSocket Client for testing WebSocket connections",
+  "description": "A powerful WebSocket testing client with support for ws/wss protocols. Features JSON formatting, connection monitoring, message history, and persistent storage. Perfect for developers testing WebSocket APIs, with a clean, modern interface for real-time testing and debugging.",
   "action": {
     "default_icon": "icon.png"
   },
