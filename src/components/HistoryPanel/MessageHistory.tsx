@@ -33,7 +33,7 @@ const MessageHistory = ({
             className="text-sm text-left text-gray-600 hover:text-gray-900 flex-1 disabled:opacity-50"
           >
             <div className="font-medium truncate">
-              {message.content.substring(0, 30)}{message.content.length > 30 ? '...' : ''}
+              {message.content && (message.content.length <= 30 ? message.content : message.content.substring(0, 30))}{message.content.length > 30 ? '...' : ''}
             </div>
             <div className="text-xs text-gray-500 mt-1">Type: {message.type}</div>
           </button>

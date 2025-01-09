@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useStorageState } from '../hooks/useStorageState';
+import { ProtocolType } from '../types/message';
 
 type ConnectionPanelProps = {
   url: string;
@@ -8,6 +9,7 @@ type ConnectionPanelProps = {
   onDisconnect: () => void;
   isConnected: boolean;
   error: string | null;
+  protocol: ProtocolType;
 };
 
 const ConnectionPanel = ({
@@ -16,7 +18,8 @@ const ConnectionPanel = ({
   onConnect,
   onDisconnect,
   isConnected,
-  error
+  error,
+  protocol
 }: ConnectionPanelProps) => {
   const [urlHistory, setUrlHistory] = useStorageState<string[]>('urlHistory', []);
 
@@ -30,34 +33,32 @@ const ConnectionPanel = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100">
-      <div className="p-4">
-        <div className="flex gap-2 items-center">
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
-            placeholder="WebSocket URL"
-            disabled={isConnected}
-          />
-          <button
-            onClick={isConnected ? onDisconnect : handleConnect}
-            className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-              isConnected
-                ? 'bg-red-500 hover:bg-red-600 text-white'
-                : 'bg-blue-500 hover:bg-blue-600 text-white'
-            }`}
-          >
-            {isConnected ? 'Disconnect' : 'Connect'}
-          </button>
-        </div>
-        {error && (
-          <div className="mt-2 text-sm text-red-500 bg-red-50 p-2 rounded">
-            {error}
-          </div>
-        )}
+    <div className="flex-1">
+      <div className="flex gap-2 items-start">
+        <input
+          type="text"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+          placeholder={protocol === 'websocket' ? "WebSocket URL (ws:// or wss://)" : "Socket.IO URL (http:// or https://)"}
+          disabled={isConnected}
+        />
+        <button
+          onClick={isConnected ? onDisconnect : handleConnect}
+          className={`px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
+            isConnected
+              ? 'bg-red-500 hover:bg-red-600 text-white'
+              : 'bg-blue-500 hover:bg-blue-600 text-white'
+          }`}
+        >
+          {isConnected ? 'Disconnect' : 'Connect'}
+        </button>
       </div>
+      {error && (
+        <div className="mt-2 text-sm text-red-500 bg-red-50 p-2 rounded">
+          {error}
+        </div>
+      )}
     </div>
   );
 };
