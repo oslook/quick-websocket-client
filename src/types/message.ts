@@ -15,4 +15,4 @@ export interface SavedMessage {
   content: string;
   type: 'text' | 'binary';
   event?: string; // For Socket.IO events
-} 
+}

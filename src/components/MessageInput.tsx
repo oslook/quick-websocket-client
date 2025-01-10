@@ -65,7 +65,7 @@ const MessageInput = ({
   };
 
   const handleSave = useCallback(() => {
-    if (message.trim()) {
+    if (message.trim() && (type === 'text' || type === 'binary')) {
       onSaveMessage({ 
         content: message.trim(), 
         type,
@@ -197,7 +197,7 @@ const MessageInput = ({
               setMessage(e.target.value);
               setShowFormatted(false);
             }}
-            className="w-full h-24 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 font-mono text-sm"
+            className="w-full h-24 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 font-mono text-xs"
             placeholder={protocol === 'socket.io' ? "Message content..." : "Type your message..."}
             disabled={!isConnected}
           />
