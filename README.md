@@ -51,3 +51,8 @@ A powerful and user-friendly WebSocket testing client for developers.
 - Secure local storage for saved data
 
 Perfect for developers who need a reliable, feature-rich WebSocket testing tool right in their browser.
+
+
+Test Websoket: wss://ws.postman-echo.com/raw
+Test Socket.IO: https://ws.postman-echo.com/socketio
+

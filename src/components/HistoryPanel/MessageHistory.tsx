@@ -2,7 +2,7 @@ import { useStorageState } from '../../hooks/useStorageState';
 import { SavedMessage } from '../../types/message';
 
 type MessageHistoryProps = {
-  onSelect: (content: string, type: 'text' | 'binary') => void;
+  onSelect: (content: string, type: 'text' | 'binary', event?: string) => void;
   disabled?: boolean;
   messages: SavedMessage[];
   onDeleteMessage: (index: number) => void;
@@ -28,14 +28,15 @@ const MessageHistory = ({
           className="group flex items-start justify-between p-2 rounded-lg hover:bg-gray-50"
         >
           <button
-            onClick={() => onSelect(message.content, message.type)}
+            onClick={() => onSelect(message.content, message.type, message.event)}
             disabled={disabled}
             className="text-sm text-left text-gray-600 hover:text-gray-900 flex-1 disabled:opacity-50"
           >
             <div className="font-medium truncate">
-              {message.content.substring(0, 30)}{message.content.length > 30 ? '...' : ''}
+              {message.content && (message.content.length <= 30 ? message.content : message.content.substring(0, 30))}{message.content.length > 30 ? '...' : ''}
             </div>
             <div className="text-xs text-gray-500 mt-1">Type: {message.type}</div>
+            {message.event && <div className="text-xs text-gray-500 mt-1">Event: {message.event}</div>}
           </button>
           <button
             onClick={() => onDeleteMessage(index)}
