@@ -69,23 +69,23 @@ const MessageItem = ({ message, className }: MessageItemProps) => {
       
       {isExpanded && (
         <div className="border-t border-current border-opacity-10">
-          <div className="flex gap-1 p-1 border-b border-current border-opacity-10 bg-opacity-50 bg-gray-50">
+          <div className="flex gap-1 p-1 border-b border-current border-opacity-10 bg-opacity-50 bg-gray-50 dark:bg-gray-700/50">
             <button
-              className={`px-2 py-0.5 text-xs rounded ${viewMode === 'text' ? 'bg-white shadow' : 'hover:bg-white'}`}
+              className={`px-2 py-0.5 text-xs rounded ${viewMode === 'text' ? 'bg-white dark:bg-gray-600 shadow' : 'hover:bg-white dark:hover:bg-gray-600'}`}
               onClick={() => setViewMode('text')}
             >
               Text
             </button>
             {isJSONContent && (
               <button
-                className={`px-2 py-0.5 text-xs rounded ${viewMode === 'json' ? 'bg-white shadow' : 'hover:bg-white'}`}
+                className={`px-2 py-0.5 text-xs rounded ${viewMode === 'json' ? 'bg-white dark:bg-gray-600 shadow' : 'hover:bg-white dark:hover:bg-gray-600'}`}
                 onClick={() => setViewMode('json')}
               >
                 JSON
               </button>
             )}
             <button
-              className={`px-2 py-0.5 text-xs rounded ${viewMode === 'hex' ? 'bg-white shadow' : 'hover:bg-white'}`}
+              className={`px-2 py-0.5 text-xs rounded ${viewMode === 'hex' ? 'bg-white dark:bg-gray-600 shadow' : 'hover:bg-white dark:hover:bg-gray-600'}`}
               onClick={() => setViewMode('hex')}
             >
               Hex
@@ -135,35 +135,32 @@ const MessageHistory = ({ messages, onClear, subscribedEvents = new Set(), proto
     if (message.type === 'connection') {
       switch (message.level) {
         case 'success':
-          return 'bg-green-50 text-green-700 border-green-200';
+          return 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800';
         case 'error':
-          return 'bg-red-50 text-red-700 border-red-200';
+          return 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800';
         case 'warning':
-          return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+          return 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800';
         default:
-          return 'bg-blue-50 text-blue-700 border-blue-200';
+          return 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800';
       }
     }
     return message.direction === 'sent' 
-      ? 'bg-purple-50 text-purple-700 border-purple-200' 
-      : 'bg-gray-50 text-gray-700 border-gray-200';
+      ? 'bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800' 
+      : 'bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700';
   };
 
   return (
     <div className="flex flex-col h-full">
       <div className="flex justify-between items-center mb-2">
-        <h2 className="text-sm font-medium text-gray-600">Message History</h2>
+        <h2 className="text-sm font-medium text-gray-600 dark:text-gray-300">Messages</h2>
         <button
           onClick={onClear}
-          className="px-2 py-1 text-xs rounded bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors"
+          className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
         >
           Clear
         </button>
       </div>
-      <div 
-        ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto space-y-1"
-      >
+      <div ref={scrollContainerRef} className="flex-1 space-y-2 overflow-y-auto">
         {filteredMessages.map((message, index) => (
           <MessageItem
             key={index}

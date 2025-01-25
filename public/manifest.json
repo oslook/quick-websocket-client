@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Quick WebSocket Client with Socket.IO",
-  "version": "0.0.2",
+  "version": "0.0.2.1",
   "description": "Construct custom Web Socket requests and handle responses to directly test your Web Socket services,Includes Socket.IO support.",
   "action": {
     "default_icon": "icon.png"

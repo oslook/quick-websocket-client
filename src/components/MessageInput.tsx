@@ -112,7 +112,7 @@ const MessageInput = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
       <div className="p-4 space-y-3">
         {protocol === 'socket.io' && (
           <div className="flex gap-2">
@@ -120,7 +120,7 @@ const MessageInput = ({
               type="text"
               value={event}
               onChange={(e) => setEvent(e.target.value)}
-              className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+              className="flex-1 px-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
               placeholder="Event name"
               disabled={!isConnected}
             />
@@ -134,19 +134,19 @@ const MessageInput = ({
                   setShowSuggestions(true);
                 }}
                 onFocus={() => setShowSuggestions(true)}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+                className="w-full px-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
                 placeholder="Subscribe to event"
                 disabled={!isConnected}
               />
               {showSuggestions && suggestions.length > 0 && (
                 <div 
                   ref={suggestionRef}
-                  className="absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg"
+                  className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg"
                 >
                   {suggestions.map((suggestion) => (
                     <button
                       key={suggestion}
-                      className="w-full px-4 py-2 text-left hover:bg-gray-50 text-sm"
+                      className="w-full px-4 py-2 text-left hover:bg-gray-50 dark:hover:bg-gray-700 text-sm dark:text-gray-200"
                       onClick={() => handleEventSelect(suggestion)}
                     >
                       {suggestion}
@@ -176,12 +176,12 @@ const MessageInput = ({
             {Array.from(subscribedEvents).map((e) => (
               <span 
                 key={e}
-                className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs flex items-center gap-1"
+                className="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 rounded-full text-xs flex items-center gap-1"
               >
                 {e}
                 <button
                   onClick={() => onUnsubscribe(e)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200"
                 >
                   ×
                 </button>
@@ -197,7 +197,7 @@ const MessageInput = ({
               setMessage(e.target.value);
               setShowFormatted(false);
             }}
-            className="w-full h-24 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 font-mono text-xs"
+            className="w-full h-24 px-4 py-2 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 font-mono text-xs dark:text-gray-200"
             placeholder={protocol === 'socket.io' ? "Message content..." : "Type your message..."}
             disabled={!isConnected}
           />
@@ -208,7 +208,7 @@ const MessageInput = ({
             <select
               value={type}
               onChange={(e) => setType(e.target.value as MessageType)}
-              className="px-3 py-1.5 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50"
+              className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
               disabled={!isConnected}
             >
               <option value="text">Text</option>
