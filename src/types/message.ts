@@ -3,6 +3,7 @@ export type MessageType = 'text' | 'binary' | 'connection';
 export type ProtocolType = 'websocket' | 'socket.io';
 
 export interface Message {
+  id: string; // Stable unique id, used as React key
   content: string;
   type: MessageType;
   direction: MessageDirection;

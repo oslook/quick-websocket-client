@@ -161,9 +161,9 @@ const MessageHistory = ({ messages, onClear, subscribedEvents = new Set(), proto
         </button>
       </div>
       <div ref={scrollContainerRef} className="flex-1 space-y-2 overflow-y-auto">
-        {filteredMessages.map((message, index) => (
+        {filteredMessages.map((message) => (
           <MessageItem
-            key={index}
+            key={message.id}
             message={message}
             className={getMessageClass(message)}
           />

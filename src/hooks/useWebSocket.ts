@@ -2,6 +2,9 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import { Message, MessageType } from '../types/message';
 import { io, Socket } from 'socket.io-client';
 
+let messageIdCounter = 0;
+const nextMessageId = () => `msg-${Date.now()}-${messageIdCounter++}`;
+
 export const useWebSocket = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -12,6 +15,7 @@ export const useWebSocket = () => {
 
   const addSystemMessage = (content: string, level: Message['level'] = 'info') => {
     setMessages(prev => [...prev, {
+      id: nextMessageId(),
       content,
       type: 'connection',
       direction: 'system',
@@ -22,6 +26,7 @@ export const useWebSocket = () => {
 
   const handleSocketIOMessage = (event: string, data: any) => {
     const newMessage: Message = {
+      id: nextMessageId(),
       content: typeof data === 'object' ? JSON.stringify(data, null, 2) : String(data),
       type: 'text',
       direction: 'received',
@@ -66,6 +71,7 @@ export const useWebSocket = () => {
           }
 
           const newMessage: Message = {
+            id: nextMessageId(),
             content: event.data instanceof Blob ? '[Binary Data]' : event.data,
             type: event.data instanceof Blob ? 'binary' : 'text',
             direction: 'received',
@@ -208,6 +214,7 @@ export const useWebSocket = () => {
       }
 
       const newMessage: Message = {
+        id: nextMessageId(),
         content,
         type,
         direction: 'sent',
