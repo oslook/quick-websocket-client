@@ -131,3 +131,6 @@ dist
 build
 build.zip
 .DS_Store
+
+# Use bun as the package manager; ignore npm's lockfile
+package-lock.json
