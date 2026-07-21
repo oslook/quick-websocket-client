@@ -70,15 +70,14 @@ const App = () => {
       disconnect();
     }
     setProtocol(newProtocol);
-    // if (newProtocol === 'websocket') {
-    //   setUrl('wss://ws.postman-echo.com/raw');
-    // } else {
-    //   setUrl('https://ws.postman-echo.com/socketio');
-    // }
     // Clear all events when switching protocols
     setSubscribedEvents(new Set());
     unsubscribedEvents.current.clear();
     allReceivedEvents.current.clear();
+    // Clear message history too: leftover messages from the old protocol
+    // would otherwise be re-scanned by the auto-subscribe effect and
+    // silently re-subscribe events the user had unsubscribed.
+    clearMessages();
   };
 
   const handleUnsubscribe = (event: string) => {
