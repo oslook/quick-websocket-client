@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useStorageState } from '../hooks/useStorageState';
-import { formatJSON, isJSON } from '../utils/jsonFormatter';
+import { formatJSON, isJSON } from '../utils/formatters';
 import { ProtocolType, SavedMessage, MessageType } from '../types/message';
 
 type MessageInputProps = {
@@ -91,15 +91,13 @@ const MessageInput = ({
       }
       if ((e.metaKey || e.ctrlKey) && e.key === 's') {
         e.preventDefault();
-        if (message.trim()) {
-          handleSave();
-        }
+        handleSave();
       }
     };
-    
+
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handleSend, handleSave, message]);
+  }, [handleSend, handleSave]);
 
   const handleFormat = () => {
     if (isJSON(message)) {

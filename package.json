@@ -1,6 +1,6 @@
 {
   "name": "websocket-client-extension",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "start": "react-scripts start",

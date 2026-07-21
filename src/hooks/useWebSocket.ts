@@ -59,10 +59,11 @@ export const useWebSocket = () => {
           );
         };
 
-        wsRef.current.onerror = (event) => {
-          setError('WebSocket error occurred');
+        wsRef.current.onerror = () => {
+          const errorMsg = `WebSocket error: code=${wsRef.current?.readyState}`;
+          setError(errorMsg);
           setIsConnected(false);
-          addSystemMessage('WebSocket connection error occurred', 'error');
+          addSystemMessage(errorMsg, 'error');
         };
 
         wsRef.current.onmessage = (event) => {

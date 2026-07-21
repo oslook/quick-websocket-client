@@ -21,7 +21,10 @@ const App = () => {
   useEffect(() => {
     // Fetch GitHub stars
     fetch('https://api.github.com/repos/oslook/quick-websocket-client')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then(data => setGithubStars(data.stargazers_count))
       .catch(console.error);
   }, []);
@@ -138,7 +141,7 @@ const App = () => {
             </div>
             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
 
-              <span className="text-sm">v0.0.2.1</span>
+              <span className="text-sm">v0.0.3</span>
               {githubStars !== null && (
                   <span className="flex items-center gap-1">
                     <svg className="w-4 h-4 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

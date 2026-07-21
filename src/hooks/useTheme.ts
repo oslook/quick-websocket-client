@@ -1,26 +1,29 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useTheme = () => {
   const [isDark, setIsDark] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme === 'dark';
-    }
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
+
+  useEffect(() => {
+    chrome.storage.local.get(['theme']).then(result => {
+      if (result.theme) {
+        setIsDark(result.theme === 'dark');
+      }
+    }).catch(console.error);
+  }, []);
 
   useEffect(() => {
     const root = window.document.documentElement;
     if (isDark) {
       root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
     } else {
       root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
     }
+    chrome.storage.local.set({ theme: isDark ? 'dark' : 'light' }).catch(console.error);
   }, [isDark]);
 
-  const toggleTheme = () => setIsDark(!isDark);
+  const toggleTheme = useCallback(() => setIsDark(prev => !prev), []);
 
   return { isDark, toggleTheme };
 }; 
