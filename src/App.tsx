@@ -136,8 +136,7 @@ const App = () => {
         <div className="p-4">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold text-gray-800 dark:text-white">Quick WebSocket Client</h1>
-              <span className="text-sm text-gray-600 dark:text-gray-400 italic">Including Socket.IO support</span>
+              <h1 className="text-xl font-bold text-gray-800 dark:text-white">WebSocket & Socket.IO Client</h1>
             </div>
             <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
 

@@ -13,7 +13,7 @@ export const useWebSocket = () => {
   const socketRef = useRef<Socket | null>(null);
   const [protocol, setProtocol] = useState<'websocket' | 'socket.io'>('websocket');
 
-  const addSystemMessage = (content: string, level: Message['level'] = 'info') => {
+  const addSystemMessage = useCallback((content: string, level: Message['level'] = 'info') => {
     setMessages(prev => [...prev, {
       id: nextMessageId(),
       content,
@@ -22,9 +22,9 @@ export const useWebSocket = () => {
       timestamp: Date.now(),
       level
     }]);
-  };
+  }, []);
 
-  const handleSocketIOMessage = (event: string, data: any) => {
+  const handleSocketIOMessage = useCallback((event: string, data: any) => {
     const newMessage: Message = {
       id: nextMessageId(),
       content: typeof data === 'object' ? JSON.stringify(data, null, 2) : String(data),
@@ -34,7 +34,7 @@ export const useWebSocket = () => {
       event
     };
     setMessages(prev => [...prev, newMessage]);
-  };
+  }, []);
 
   const connect = useCallback((url: string) => {
     try {
@@ -167,7 +167,7 @@ export const useWebSocket = () => {
       setError(errorMessage);
       addSystemMessage(errorMessage, 'error');
     }
-  }, []);
+  }, [addSystemMessage, handleSocketIOMessage]);
 
   const disconnect = useCallback(() => {
     addSystemMessage('Disconnecting...', 'info');
@@ -179,7 +179,7 @@ export const useWebSocket = () => {
       socketRef.current = null;
     }
     setIsConnected(false);
-  }, [protocol]);
+  }, [protocol, addSystemMessage]);
 
   const sendMessage = useCallback((content: string, type: MessageType, event?: string) => {
     if (!isConnected) {
@@ -228,7 +228,7 @@ export const useWebSocket = () => {
       setError(errorMessage);
       addSystemMessage(errorMessage, 'error');
     }
-  }, [isConnected, protocol]);
+  }, [isConnected, protocol, addSystemMessage]);
 
   // Cleanup on unmount
   useEffect(() => {
