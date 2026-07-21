@@ -1,6 +1,6 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { Message } from '../types/message';
 import { format } from 'date-fns';
-import { useEffect, useRef, useState } from 'react';
 import { formatJSON, isJSON, formatHexDump } from '../utils/formatters';
 
 type MessageHistoryProps = {
@@ -179,23 +179,35 @@ const MessageHistory = ({ messages, onClear, subscribedEvents = new Set(), proto
   );
 };
 
-const formatMessage = (message: Message, content: string) => {
+const SentIcon = () => (
+  <svg className="w-3.5 h-3.5 inline-block text-purple-500 dark:text-purple-400" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H3.75a.75.75 0 0 1 0-1.5h7.44L8.22 4.03a.75.75 0 0 1 0-1.06z"/>
+  </svg>
+);
+
+const ReceivedIcon = () => (
+  <svg className="w-3.5 h-3.5 inline-block text-green-500 dark:text-green-400" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 1.06L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06z"/>
+  </svg>
+);
+
+const formatMessage = (message: Message, content: string): React.ReactNode => {
   if (message.type === 'connection') {
     return content;
   }
   
-  let prefix = '';
+  let prefix: React.ReactNode = '';
   if (message.direction === 'sent') {
     prefix = message.event 
-      ? `📤 [Emit: ${message.event}] ` 
-      : '📤 [Sent] ';
+      ? <><SentIcon /> [Emit: {message.event}] </>
+      : <><SentIcon /> [Sent] </>;
   } else {
     prefix = message.event 
-      ? `📥 [Event: ${message.event}] ` 
-      : '📥 [Received] ';
+      ? <><ReceivedIcon /> [Event: {message.event}] </>
+      : <><ReceivedIcon /> [Received] </>;
   }
   
-  return prefix + content;
+  return <>{prefix}{content}</>;
 };
 
 export default MessageHistory; 
