@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { useStorageState } from '../hooks/useStorageState';
 import { formatJSON, isJSON } from '../utils/formatters';
 import { ProtocolType, SavedMessage, MessageType } from '../types/message';
+import Select from './Select';
 
 type MessageInputProps = {
   onSend: (content: string, type: MessageType, event?: string) => void;
@@ -203,15 +204,16 @@ const MessageInput = ({
 
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
-            <select
+            <Select
               value={type}
-              onChange={(e) => setType(e.target.value as MessageType)}
-              className="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 dark:text-gray-200"
+              onChange={(val) => setType(val as MessageType)}
+              options={[
+                { value: 'text', label: 'Text' },
+                { value: 'binary', label: 'Binary' },
+              ]}
               disabled={!isConnected}
-            >
-              <option value="text">Text</option>
-              <option value="binary">Binary</option>
-            </select>
+              className="w-24"
+            />
             {type === 'text' && (
               <button
                 onClick={handleFormat}

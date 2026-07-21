@@ -14,7 +14,7 @@ const UrlHistory = ({ onSelect, disabled }: UrlHistoryProps) => {
 
   if (urlHistory.length === 0) {
     return (
-      <div className="text-sm text-gray-500 italic">No connection history</div>
+      <div className="text-sm text-gray-500 dark:text-gray-400 italic">No connection history</div>
     );
   }
 
@@ -23,19 +23,19 @@ const UrlHistory = ({ onSelect, disabled }: UrlHistoryProps) => {
       {urlHistory.map((url) => (
         <div
           key={url}
-          className="group flex items-center justify-between p-2 rounded-lg hover:bg-gray-50"
+          className="group flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
         >
           <button
             onClick={() => onSelect(url)}
             disabled={disabled}
-            className="text-sm text-left text-gray-600 hover:text-gray-900 truncate flex-1 disabled:opacity-50"
+            className="text-sm text-left text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 truncate flex-1 disabled:opacity-50"
             title={url}
           >
             {url}
           </button>
           <button
             onClick={() => handleDelete(url)}
-            className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="text-red-400 hover:text-red-600 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
