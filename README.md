@@ -1,4 +1,11 @@
-# Quick WebSocket Client
+<div align="center">
+  <img src="https://lh3.googleusercontent.com/NZSOV5cJajtstwWTBbav3WTrN8XaKnJWCfG8UIzxHXCbII21P8zKWFHfeskBMrKarFIXIZlmo3r2dsWL1i1Z4QfCSA=s120" alt="Websocket client icon">
+  <h1>Websocket Client Extension</h1>
+  <p>Quick WebSocket Client with Socket.IO</p>
+</div>
+
+
+# [ ⏬ Install to Chrome](https://chromewebstore.google.com/detail/quick-websocket-client-wi/enmpedlkjjjnhoehlkkghdjiloebecpn)
 
 A powerful and user-friendly WebSocket testing client for developers.
 
